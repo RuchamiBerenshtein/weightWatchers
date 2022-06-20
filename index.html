@@ -6,12 +6,44 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <template>
+        <tr>
+            <td class="firstName"></td>
+            <td class="lastName"></td>
+            <td class="city"></td>
+            <td class="phone"></td>
+            <td class="email"></td>
+            <td class="hight"></td>
+            <td class="weight"></td>
+            <td class="BMI"></td>
+        </tr>
+
+    </template>
 </head>
 
-<body>
+<body onload="onload()">
+
+    <table>
+        <thead>
+            <tr>
+                <th>first name</th>
+                <th>last name</th>
+                <th>city</th>
+                <th>phone</th>
+                <th>email</th>
+                <th>hight</th>
+                <th>weight</th>
+                <th>BMI</th>
+            </tr>
+        </thead>
+        <tbody id="users"></tbody>
+    </table>
 
     <script src="/src/address.js"></script>
     <script src="/src/user.js"></script>
+    <script src="/src/manager.js"></script>
+    <script src="/src/index.js"></script>
+
 
 </body>
 

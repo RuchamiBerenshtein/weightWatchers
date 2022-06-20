@@ -1,6 +1,7 @@
 class User {
 
-    constructor(firstName, lastName, address, phone, email, hight, weight) {
+    constructor(id, firstName, lastName, address, phone, email, hight, weight) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = new Address(address.city, address.street, address.number);
@@ -10,4 +11,6 @@ class User {
         this.weight = [];
         this.weight.push(weight);
     }
+
+
 }
