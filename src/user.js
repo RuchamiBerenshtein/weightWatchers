@@ -7,10 +7,9 @@ class User {
         this.address = new Address(address.city, address.street, address.number);
         this.phone = phone;
         this.email = email;
-        this.hight= hight;
+        this.hight = hight;
         this.weight = [];
         this.weight.push(weight);
     }
-
 
 }
