@@ -1,7 +1,5 @@
 class Manager {
 
-    url = "http://localhost:3000/users";
-
     constructor(id, firstName, lastName, address, phone, email) {
         this.id = id;
         this.firstName = firstName;
@@ -21,36 +19,50 @@ class Manager {
                 alert(`Error ${request.status}: ${request.statusText}`);
             } else {
                 let users = JSON.parse(request.responseText).users;
-                this.showUsers(users);
+                this._displayUsers(users);
             }
         }
     }
 
-    showUsers = (users) => {
+
+    _displayUsers(users) {
+        const tBody = document.getElementById('users');
+        tBody.innerHTML = '';
+
+        const button = document.createElement('button');
+
         users.forEach(user => {
 
-            const tmp = document.getElementsByTagName("template")[0];
-            let element = tmp.content.cloneNode(true);
+            let userDetails = button.cloneNode(false);
+            userDetails.innerText = 'Details';
+            userDetails.setAttribute('onclick', `changePage(${user.id})`);
 
-            element.querySelector(".firstName").innerText = user.firstName;
-            element.querySelector(".lastName").innerText = user.lastName;
-            element.querySelector(".city").innerText = user.address.city;
-            element.querySelector(".phone").innerText = user.phone;
-            element.querySelector(".email").innerText = user.email;
-            element.querySelector(".hight").innerText = user.hight;
-            element.querySelector(".weight").innerText = user.weight[user.weight.length - 1];
-            element.querySelector(".BMI").innerText = user.weight[user.weight.length - 1] / (user.hight * user.hight);
+            let tr = tBody.insertRow();
+
+            let td1 = tr.insertCell(0);
+            let textNodeFirstName = document.createTextNode(user.firstName);
+            td1.appendChild(textNodeFirstName);
+
+            let td2 = tr.insertCell(1);
+            let textNodeLastName = document.createTextNode(user.lastName);
+            td2.appendChild(textNodeLastName);
+            let td3 = tr.insertCell(2);
+            let textNodeBMI = document.createTextNode(user.weight[user.weight.length - 1] / (user.hight * user.hight));
             if (user.weight.length > 1) {
                 if (user.weight[user.weight.length - 1] / (user.hight * user.hight) >= user.weight[user.weight.length - 2] / (user.hight * user.hight)) {
-                    element.querySelector(".BMI").style.color = 'red';
+                    td3.style.color = 'red';
                 } else {
-                    element.querySelector(".BMI").style.color = 'green';
+                    td3.style.color = 'green';
                 }
             }
+            td3.appendChild(textNodeBMI);
 
-            const userTable = document.getElementById('users');
-            userTable.appendChild(element)
+            let td4 = tr.insertCell(3);
+            td4.appendChild(userDetails);
         });
     }
+}
 
+const changePage = (id) => {
+    location.href = `/userDetails.html?id=${id}`
 }
