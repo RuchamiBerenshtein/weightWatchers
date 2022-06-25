@@ -23,6 +23,33 @@
 
 <body onload="onload()">
 
+
+    <select id="selectSearch" onchange="option()">
+        <option value="choose"></option>
+        <option id="searchByFName" value="searchByFName">search by first name</option>
+        <option id="searchByLName" value="searchByLName">search by last name</option>
+        <option id="searchByBMI" value="searchByBMI">search by BMI</option>
+    </select>
+
+    <div style="display:none" id="firstName">
+        <input type="text" id="fname" >
+        <button onclick="searchByFName()">
+            search
+        </button>
+    </div>
+    <div style="display:none" id="lastName">
+        <input type="text" id="lname" >
+        <button onclick="searchByLName()">
+            search
+        </button>
+    </div>
+    <div style="display:none" id="BMI">
+        <input type="text" id="minBMI" >
+        <input type="text" id="maxBMI" >
+        <button onclick="searchByBMI()">
+            search
+        </button>
+    </div>
     <table>
         <thead>
             <tr>
