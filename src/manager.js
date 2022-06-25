@@ -1,6 +1,6 @@
 class Manager {
 
-    url = "http://localhost:3000/users";
+    
 
     constructor(id, firstName, lastName, address, phone, email) {
         this.id = id;
@@ -15,6 +15,7 @@ class Manager {
 
     getAll() {
         const request = new XMLHttpRequest()
+//url = "http://localhost:3000/users";
         request.open('GET', './data/users.json');
         request.send();
         request.onload =  () => {

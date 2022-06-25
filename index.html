@@ -17,12 +17,18 @@
             <td class="weight"></td>
             <td class="BMI"></td>
         </tr>
-
     </template>
 </head>
 
 <body onload="onload()">
-
+    <select id="selectSearch" onchange="option()">
+        <option id="searchByFName">search by first name</option>
+        <option id="searchByLName">search by last name</option>
+        <option id="searchByBMI">search by BMI</option>
+    </select>
+<input type="text" id="byLName" style="display:none" value="enter first Name"><button onclick="searchByLName()">search</button>
+<input type="text" id="byFName" style="display:none" value="enter last Name"><button onclick="searchByFName()">search</button>
+<input type="text" id="byBMI" style="display:none" value="enter BNI"><button onclick="searchByBMI()">search</button>
     <table>
         <thead>
             <tr>
@@ -38,7 +44,19 @@
         </thead>
         <tbody id="users"></tbody>
     </table>
-
+    <button onclick="newUser()" >add new user</button>
+    <div style="display:none" id="newUser">
+        first name: <input type="text" id="fname" /><br />
+        last name: <input type="text" id="lname" /><br />
+        city: <input type="text" id="city" /><br />
+        street: <input type="text" id="street" /><br />
+        number: <input type="text" id="number" /><br />
+        phone: <input type="text" id="phone" /><br />
+        email: <input type="text" id="email" /><br />
+        hight: <input type="text" id="hight" /><br />
+        weight: <input type="text" id="weight" /><br />
+        <button onclick="createUser()"></button>
+    </div>
     <script src="/src/address.js"></script>
     <script src="/src/user.js"></script>
     <script src="/src/manager.js"></script>
