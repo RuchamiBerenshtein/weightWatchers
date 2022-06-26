@@ -4,9 +4,6 @@ if (!id) {
     location.href = '/index.html';
 }
 
-// const user = null;
-
-
 const findUser = () => {
     const request = new XMLHttpRequest()
     request.open('GET', './data/users.json');
@@ -23,18 +20,20 @@ const findUser = () => {
 }
 
 const showUserDetails = (user) => {
-    document.getElementById('firstName').innerHTML = user.firstName;
-    document.getElementById('lastName').innerHTML = user.lastName;
-    document.getElementById('address').innerHTML = user.address.city + ", " + user.address.street + " " + user.address.number;
-    document.getElementById('phone').innerHTML = user.phone;
-    document.getElementById('email').innerHTML = user.email;
-    document.getElementById('hight').innerHTML = user.hight;
-    document.getElementById('currentWeight').innerHTML = user.weight[user.weight.length - 1];
+    document.getElementById('firstName').value = user.firstName;
+    document.getElementById('lastName').value = user.lastName;
+    document.getElementById('city').value = user.address.city;
+    document.getElementById('street').value = user.address.street;
+    document.getElementById('number').value = user.address.number;
+    document.getElementById('phone').value = user.phone;
+    document.getElementById('email').value = user.email;
+    document.getElementById('hight').value = user.hight;
+    document.getElementById('currentWeight').value = user.weight[user.weight.length - 1];
     let weights = "";
     for (let i = 0; i < user.weight.length-1; i++){
         weights += "<br/>" + user.weight[i];
     }
     document.getElementById('weightHistory').innerHTML = weights;
-    document.getElementById('BMI').innerHTML = user.weight[user.weight.length - 1] / (user.hight * user.hight);
+    document.getElementById('BMI').value = user.weight[user.weight.length - 1] / (user.hight * user.hight);
 }
 findUser();

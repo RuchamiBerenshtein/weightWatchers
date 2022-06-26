@@ -6,21 +6,41 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weight Watchers</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body onload="onload()">
+    <div id="blur">
+        <table>
+            <thead>
+                <tr>
+                    <th>first name</th>
+                    <th>last name</th>
+                    <th>BMI</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="users"></tbody>
+        </table>
 
-    <table>
-        <thead>
-            <tr>
-                <th>first name</th>
-                <th>last name</th>
-                <th>BMI</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="users"></tbody>
-    </table>
+        <button onclick="addMeeting()">Add Meeting</button>
+    </div>
+
+
+    <div id="addMeeting">
+        <h3>Create a new meeting</h3>
+        <label>Date</label> <input type="date" name="date" id="date">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>New Weight</th>
+                </tr>
+            </thead>
+            <tbody id="newUsersWeight"></tbody>
+        </table>
+        <button onclick="closeInput()">Save Meeting</button>
+    </div>
 
     <script src="/src/address.js"></script>
     <script src="/src/user.js"></script>

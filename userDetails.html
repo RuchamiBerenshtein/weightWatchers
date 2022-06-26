@@ -9,15 +9,20 @@
 </head>
 
 <body>
-    <h3 id="firstName"></h3>
-    <h3 id="lastName"></h3>
-    <p>Address: <span id="address"></span></p>
-    <p>Phone: <span id="phone"></span></p>
-    <p>Email: <span id="email"></span></p>
-    <p>Hight: <span id="hight"></span></p>
-    <p>Current Weight: <span id="currentWeight"></span></p>
-    <p>Weight History: <span id="weightHistory"></span></p>
-    <p>BMI: <span id="BMI"></span></p>
+    <form action="">
+        <label>First Name: </label> <input type="text" name="firstName" id="firstName"> <br />
+        <label>Last Name</label> <input type="text" name="lastName" id="lastName"> <br />
+        <label>Address: </label> <input type="text" name="city" id="city">
+            <input type="text" name="street" id="street">
+            <input type="number" name="number" id="number"> <br/>
+        <label>Phone: </label> <input type="number" name="phone" id="phone"> <br/>
+        <label>Email: </label> <input type="email" name="email" id="email"> <br />
+        <label>Hight: </label> <input type="number" name="hight" id="hight"> <br/>
+        <label>Current Weight: </label> <input type="number" name="currentWeight" id="currentWeight"> <br/>
+        <label>Weight History: </label> <span id="weightHistory"></span> <br/>
+        <label>BMI: </label> <input type="number" name="BMI" id="BMI">
+        <button type="submit">Save Changes</button>
+    </form>
 
     <script src="/src/userDetails.js"></script>
 </body>
