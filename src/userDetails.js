@@ -1,7 +1,7 @@
 const searchParams = new URLSearchParams(location.search);
 const id = parseInt(searchParams.get('id'));
 if (!id) {
-    location.href = '/index.html';
+    location.href = '/login.html';
 }
 
 const findUser = () => {
@@ -34,6 +34,6 @@ const showUserDetails = (user) => {
         weights += "<br/>" + user.weight[i];
     }
     document.getElementById('weightHistory').innerHTML = weights;
-    document.getElementById('BMI').value = user.weight[user.weight.length - 1] / (user.hight * user.hight);
+    document.getElementById('BMI').value = user.weight[user.weight.length - 1] / (user.hight ** 2);
 }
 findUser();

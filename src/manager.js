@@ -47,9 +47,9 @@ class Manager {
             let textNodeLastName = document.createTextNode(user.lastName);
             td2.appendChild(textNodeLastName);
             let td3 = tr.insertCell(2);
-            let textNodeBMI = document.createTextNode(user.weight[user.weight.length - 1] / (user.hight * user.hight));
+            let textNodeBMI = document.createTextNode(user.weight[user.weight.length - 1] / (user.hight ** 2));
             if (user.weight.length > 1) {
-                if (user.weight[user.weight.length - 1] / (user.hight * user.hight) >= user.weight[user.weight.length - 2] / (user.hight * user.hight)) {
+                if (user.weight[user.weight.length - 1] / (user.hight ** 2) >= user.weight[user.weight.length - 2] / (user.hight ** 2)) {
                     tr.style.color = 'red';
                 } else {
                     tr.style.color = 'green';
@@ -78,7 +78,7 @@ class Manager {
                     let tr = tBody.insertRow();
 
                     let td1 = tr.insertCell(0);
-                    let textNodeName = document.createTextNode(user.firstName + user.lastName);
+                    let textNodeName = document.createTextNode(user.firstName + " " + user.lastName);
                     td1.appendChild(textNodeName);
 
                     let td2 = tr.insertCell(1);
