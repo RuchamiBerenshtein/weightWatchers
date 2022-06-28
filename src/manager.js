@@ -18,8 +18,8 @@ class Manager {
             if (request.status != 200) {
                 alert(`Error ${request.status}: ${request.statusText}`);
             } else {
-                let users = JSON.parse(request.responseText).users;
-                this._displayUsers(users);
+                this.users = JSON.parse(request.responseText).users;
+                this._displayUsers(this.users);
             }
         }
     }
@@ -64,33 +64,46 @@ class Manager {
 
 
     newMeeting() {
-        const request = new XMLHttpRequest()
-        request.open('GET', './data/users.json');
-        request.send();
-        request.onload = () => {
-            if (request.status != 200) {
-                alert(`Error ${request.status}: ${request.statusText}`);
-            } else {
-                let users = JSON.parse(request.responseText).users;
-                const tBody = document.getElementById('newUsersWeight');
-                tBody.innerHTML = "";
-                users.forEach(user => {
-                    let tr = tBody.insertRow();
 
-                    let td1 = tr.insertCell(0);
-                    let textNodeName = document.createTextNode(user.firstName + " " + user.lastName);
-                    td1.appendChild(textNodeName);
+        const tBody = document.getElementById('newUsersWeight');
+        tBody.innerHTML = "";
+        this.users.forEach(user => {
+            let tr = tBody.insertRow();
 
-                    let td2 = tr.insertCell(1);
-                    let weight = document.createElement("INPUT");
-                    weight.setAttribute("type", "number");
-                    weight.setAttribute("step", 0.01);
-                    weight.setAttribute("value", user.weight[user.weight.length - 1]);
-                    td2.appendChild(weight);
-                })
-            }
-        }
+            let td1 = tr.insertCell(0);
+            let textNodeName = document.createTextNode(user.firstName + " " + user.lastName);
+            td1.appendChild(textNodeName);
+
+            let td2 = tr.insertCell(1);
+            let weight = document.createElement("INPUT");
+            weight.setAttribute("type", "number");
+            weight.setAttribute("step", 0.01);
+            weight.setAttribute("value", user.weight[user.weight.length - 1]);
+            td2.appendChild(weight);
+        })
     }
+
+    searchByFName() {
+        let data = document.getElementById("fname").value;
+        let filteredUser = this.users.filter(user => user.firstName.includes(data));
+        this._displayUsers(filteredUser);
+    }
+
+    searchByLName() {
+        let data = document.getElementById("lname").value;
+        let filteredUser = this.users.filter(user => user.lastName.includes(data));
+        this._displayUsers(filteredUser);
+    }
+
+    searchByBMI() {
+        let minBMI = parseFloat(document.getElementById("minBMI").value);
+        let maxBMI = parseFloat(document.getElementById("maxBMI").value);
+        let filteredUser = this.users.filter(user =>
+            user.weight[user.weight.length - 1] / user.hight ** 2 >= minBMI &&
+            user.weight[user.weight.length - 1] / user.hight ** 2 <= maxBMI
+        );
+        this._displayUsers(filteredUser);
+    };
 }
 
 const changePage = (id) => {

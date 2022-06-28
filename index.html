@@ -10,6 +10,35 @@
 </head>
 
 <body onload="onload()">
+
+    <button onclick="toFoodPage()">Search for nutritional value</button><br>
+
+    <select id="selectSearch" onchange="option()">
+        <option value="choose"></option>
+        <option id="searchByFName" value="searchByFName">search by first name</option>
+        <option id="searchByLName" value="searchByLName">search by last name</option>
+        <option id="searchByBMI" value="searchByBMI">search by BMI</option>
+    </select><br/>  
+
+    <div style="display:none" id="firstName">
+        <input type="text" id="fname">
+        <button onclick="searchByFName()">
+            search
+        </button>
+    </div>
+    <div style="display:none" id="lastName">
+        <input type="text" id="lname">
+        <button onclick="searchByLName()">
+            search
+        </button>
+    </div>
+    <div style="display:none" id="BMI">
+        <input type="number" id="minBMI" step="0.01">
+        <input type="number" id="maxBMI" step="0.01">
+        <button onclick="searchByBMI()">
+            search
+        </button>
+    </div><br/>
     <div id="blur">
         <table>
             <thead>
@@ -40,7 +69,7 @@
         </table>
         <button onclick="closeInput()">Save Meeting</button>
     </div>
-    
+
     <script src="/src/address.js"></script>
     <script src="/src/user.js"></script>
     <script src="/src/manager.js"></script>
