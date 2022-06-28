@@ -5,13 +5,13 @@ const onload = () => {
     m.getAll();
 }
 function option() {
-    var e = document.getElementById("selectSearch");
-    var strUser = e.value;
-    alert(strUser) 
-    filterByType(strUser);
+    const e = document.getElementById("selectSearch");
+    const type = e.value;
+    alert(type) 
+    filterByType(type);
 }
 
-function filterByType(strUser) {
+function filterByType(type) {
 
     if (strUser === "searchByFName") {
         document.getElementById("firstName").style.display = "block"
@@ -40,4 +40,8 @@ function searchByLName(){
 
 function searchByBMI(){
     m.searchByBMI();
+}
+
+function toFoodPage(){
+    window.location.href = "food.html";
 }

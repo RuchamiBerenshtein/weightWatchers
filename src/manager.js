@@ -11,7 +11,27 @@ class Manager {
         this.email = email;
         this.users = [];
     }
+    drew(users){
+        users.forEach(user => {
+            this.users.push(user);
+            const tmp = document.getElementsByTagName("template")[0];
+            let element = tmp.content.cloneNode(true);
+            element.querySelector(".firstName").innerText = user.firstName; 
+            element.querySelector(".lastName").innerText = user.lastName; 
+            element.querySelector(".city").innerText = user.city; 
+            element.querySelector(".phone").innerText = user.phone; 
+            element.querySelector(".email").innerText = user.email; 
+            element.querySelector(".hight").innerText = user.hight; 
+            element.querySelector(".weight").innerText = user.weight[user.weight.length - 1]; 
+            element.querySelector(".BMI").innerText = user.weight[user.weight.length - 1]/(user.hight * user.hight); 
 
+            const c = document.getElementById('users');
+            c.appendChild(element)
+        });
+    
+    console.log(this.users);
+
+    }
 
     getAll() {
         const request = new XMLHttpRequest()
@@ -21,30 +41,13 @@ class Manager {
             if (request.status != 200) {
                 alert(`Error ${request.status}: ${request.statusText}`);
             } else {
+                debugger
                 let users = JSON.parse(request.responseText).users;
                 JSON.stringify(sessionStorage.setItem("users", users));
                 console.log(users);
-                users.forEach(user => {
-                    this.users.push(user);
-                    const tmp = document.getElementsByTagName("template")[0];
-                    let element = tmp.content.cloneNode(true);
-                    element.querySelector(".firstName").innerText = user.firstName; 
-                    element.querySelector(".lastName").innerText = user.lastName; 
-                    element.querySelector(".city").innerText = user.city; 
-                    element.querySelector(".phone").innerText = user.phone; 
-                    element.querySelector(".email").innerText = user.email; 
-                    element.querySelector(".hight").innerText = user.hight; 
-                    element.querySelector(".weight").innerText = user.weight[user.weight.length - 1]; 
-                    element.querySelector(".BMI").innerText = user.weight[user.weight.length - 1]/(user.hight * user.hight); 
-
-                    const c = document.getElementById('users');
-                    c.appendChild(element)
-                });
-            }
-            console.log(this.users);
-        }
-    }
-
+               this.drew(users);
+    }}}
+  
 
     searchByFName(){
         var data = document.getElementById("fname").value;   
@@ -52,19 +55,18 @@ class Manager {
         let filteredUser = this.users.filter((user) => {
             return user.firstName === data;
           });
-          console.log(filteredUser);
-          console.log(filteredUser[0].lastName);
+          this.drew(filteredUser);
         alert(filteredUser);
     }
     
     searchByLName(){
-        var data = document.getElementById("lname").value;
+        let data = document.getElementById("lname").value;
         console.log(data);
        let filteredUser = this.users.filter((user) => {
             return user.lastName === data;
           });
-          console.log(filteredUser);
-          console.log(filteredUser[0].firstName);
+           this.drew(filteredUser);
+        console.log(filteredUser);
         alert(filteredUser);
     }
 
@@ -75,12 +77,11 @@ class Manager {
         return ans;
     }
     searchByBMI(){
-        debugger
-        var minBMI = document.getElementById("minBMI").value;
-        var maxBMI = document.getElementById("maxBMI").value;
+    
+        let minBMI = document.getElementById("minBMI").value;
+        let maxBMI = document.getElementById("maxBMI").value;
       let arr = this.byBMIFunc(this.users,minBMI, maxBMI); 
           console.log(arr);
-        //   console.log(filteredUser[0].firstName);
         alert(arr);
     };
 
