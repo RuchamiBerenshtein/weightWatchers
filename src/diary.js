@@ -4,8 +4,8 @@ if (!id) {
     location.href = '/login.html';
 }
 
-const url = `http://localhost:3000/diaries?id=${id}`
-const postUrl = `http://localhost:3000/diaries/${id}`;
+const url = `http://localhost:3000/users?id=${id}`
+const postUrl = `http://localhost:3000/users/${id}`;
 
 let userDaily;
 
@@ -145,18 +145,18 @@ const saveDaily = () => {
         "snack": snack.filter(food => food !== "")
     }
     let i
-    for (i = 0; userDaily.days[i].date !== newDay.date; i++);
+    for (i = 0; userDaily.diary[i].date !== newDay.date; i++);
     if (i > -1) {
-        userDaily.days[i] = newDay;;
+        userDaily.diary[i] = newDay;;
     }
     else {
-        userDaily.days.push(newDay);
+        userDaily.diary.push(newDay);
     }
 
     fetch(postUrl, {
         method: `PATCH`,
         body: JSON.stringify({
-            'days': userDaily.days,
+            'diary': userDaily.diary,
         }),
         headers: { 'Content-type': `application/json; charset=UTF-8` },
     }).then((response) => {
@@ -188,7 +188,7 @@ const displayDiary = () => {
     tBody.innerHTML = '';
     const button = document.createElement('button');
 
-    userDaily.days.forEach(day => {
+    userDaily.diary.forEach(day => {
 
         let tr = tBody.insertRow();
 

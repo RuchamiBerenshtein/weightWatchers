@@ -36,7 +36,7 @@ const showUserDetails = () => {
         weights += "<br/>" + user.weight[i];
     }
     document.getElementById('weightHistory').innerHTML = weights;
-    document.getElementById('BMI').value = user.weight[user.weight.length - 1] / (user.hight ** 2);
+    document.getElementById('BMI').value = (user.weight[user.weight.length - 1] / (user.hight ** 2)).toFixed(2);
 }
 
 findUser();
