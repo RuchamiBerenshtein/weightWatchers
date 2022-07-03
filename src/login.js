@@ -12,13 +12,16 @@ const validation = () => {
                 alert(`Error ${request.status}: ${request.statusText}`);
             } else {
                 const users = JSON.parse(request.responseText).users;
-                users.forEach(user => {
-                    if (user.email === document.getElementById('email').value) {
-                        location.href = `/userDetails.html?id=${user.id}`;
-                    }
-                })
-                alert("user is'nt defined")
+                const user = users.find(user => user.email === document.getElementById('email').value);
+                if (user)
+                    location.href = `/userDetails.html?id=${user.id}`;
+                else
+                    alert("user is'nt defined")
             }
         }
     }
+}
+
+function toFoodPage(){
+    location.href = "/food.html";
 }

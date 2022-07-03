@@ -1,25 +1,29 @@
+document.getElementById('reset').style.display = "none";
+
 const options = {
     method: 'GET',
     headers: {
         'X-RapidAPI-Key': '071fae810amshb706a2052da6b94p190cadjsnf53c140ff392',
         'X-RapidAPI-Host': 'calorieninjas.p.rapidapi.com'
     }
-};
-function getNutritionalValues(){
+}
+
+const getNutritionalValues = () => {
     const food = document.getElementById('nutritionalValues').value;
     document.getElementById('nutritionalValues').value = "";
-    if (food != ""){
+    if (food != "") {
         fetch(`https://calorieninjas.p.rapidapi.com/v1/nutrition?query=${food}`, options)
-        .then(response => response.json())
-        .then(response => drew(response.items[0]))
-        .catch(err => console.error(err));
+            .then(response => response.json())
+            .then(response => drew(response.items[0]))
+            .catch(err => alert("product is'nt defined" + err));
     }
 }
 
 
- function drew(food){
+const drew = (food) => {
+    document.getElementById('reset').style.display = "block";
     let table = '';
-    table+=`
+    table += `
     <tr class= "item">
     <th>${food.name}</th>
     <th>${food.calories}</th>
@@ -34,6 +38,12 @@ function getNutritionalValues(){
     <th>${food.protein_g}</th>
     <th>${food.carbohydrates_total_g}</th>
     </tr> `
-    const container = document.querySelector('.foodTable')
-    container.innerHTML +=table;
+    const container = document.querySelector('.foodTable');
+    container.innerHTML += table;
+}
+
+
+const reset = () => {
+    document.getElementById('reset').style.display = "none";
+    document.querySelector('.foodTable').innerHTML = "";
 }

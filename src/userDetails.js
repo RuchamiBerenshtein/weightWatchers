@@ -4,6 +4,8 @@ if (!id) {
     location.href = '/login.html';
 }
 
+let user = null;
+
 const findUser = () => {
     const request = new XMLHttpRequest()
     request.open('GET', './data/users.json');
@@ -13,13 +15,13 @@ const findUser = () => {
             alert(`Error ${request.status}: ${request.statusText}`);
         } else {
             let users = JSON.parse(request.responseText).users;
-            const user = users.find(u => u.id === id);
-            showUserDetails(user);
+            user = users.find(u => u.id === id);
+            showUserDetails();
         }
     }
 }
 
-const showUserDetails = (user) => {
+const showUserDetails = () => {
     document.getElementById('firstName').value = user.firstName;
     document.getElementById('lastName').value = user.lastName;
     document.getElementById('city').value = user.address.city;
@@ -36,4 +38,9 @@ const showUserDetails = (user) => {
     document.getElementById('weightHistory').innerHTML = weights;
     document.getElementById('BMI').value = user.weight[user.weight.length - 1] / (user.hight ** 2);
 }
+
 findUser();
+
+const diary = () => {
+    location.href = `/diary.html?id=${user.id}`;
+}

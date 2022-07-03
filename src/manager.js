@@ -19,23 +19,19 @@ class Manager {
                 alert(`Error ${request.status}: ${request.statusText}`);
             } else {
                 this.users = JSON.parse(request.responseText).users;
-                this._displayUsers(this.users);
+                this.displayUsers(this.users);
             }
         }
     }
 
 
-    _displayUsers(users) {
+    displayUsers(users) {
         const tBody = document.getElementById('users');
         tBody.innerHTML = '';
 
         const button = document.createElement('button');
 
         users.forEach(user => {
-
-            let userDetails = button.cloneNode(false);
-            userDetails.innerText = 'Details';
-            userDetails.setAttribute('onclick', `changePage(${user.id})`);
 
             let tr = tBody.insertRow();
 
@@ -57,6 +53,9 @@ class Manager {
             }
             td3.appendChild(textNodeBMI);
 
+            let userDetails = button.cloneNode(false);
+            userDetails.innerText = 'Details';
+            userDetails.setAttribute('onclick', `changePage(${user.id})`);
             let td4 = tr.insertCell(3);
             td4.appendChild(userDetails);
         });
@@ -64,7 +63,6 @@ class Manager {
 
 
     newMeeting() {
-
         const tBody = document.getElementById('newUsersWeight');
         tBody.innerHTML = "";
         this.users.forEach(user => {
@@ -86,13 +84,13 @@ class Manager {
     searchByFName() {
         let data = document.getElementById("fname").value;
         let filteredUser = this.users.filter(user => user.firstName.includes(data));
-        this._displayUsers(filteredUser);
+        this.displayUsers(filteredUser);
     }
 
     searchByLName() {
         let data = document.getElementById("lname").value;
         let filteredUser = this.users.filter(user => user.lastName.includes(data));
-        this._displayUsers(filteredUser);
+        this.displayUsers(filteredUser);
     }
 
     searchByBMI() {
@@ -102,7 +100,7 @@ class Manager {
             user.weight[user.weight.length - 1] / user.hight ** 2 >= minBMI &&
             user.weight[user.weight.length - 1] / user.hight ** 2 <= maxBMI
         );
-        this._displayUsers(filteredUser);
+        this.displayUsers(filteredUser);
     };
 }
 

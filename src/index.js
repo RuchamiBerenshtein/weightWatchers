@@ -6,23 +6,36 @@ const onload = () => {
 }
 
 const addMeet = document.getElementById('addMeeting');
-const blur = document.getElementById('blur');
+const toBlur = document.getElementById('toBlur');
+
 const addMeeting = () => {
     m.newMeeting();
-    document.getElementById('date').value = Date.now();
-    blur.classList.add('blur');
+    document.getElementById('date').value = formatDate();
+    toBlur.classList.add('blur');
     addMeet.style.display = "block";
 }
 
+const padTo2Digits = (num => {
+    return num.toString().padStart(2, '0');
+})
+
+const formatDate = ((date = new Date()) => {
+    return [
+        date.getFullYear(),
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+    ].join('-');
+})
+
 const closeInput = () => {
-    blur.classList.remove('blur');
+    toBlur.classList.remove('blur');
     addMeet.style.display = "none";
 }
 
 function option() {
     const e = document.getElementById("selectSearch");
     const type = e.value;
-    alert(type) 
+    alert(type)
     filterByType(type);
 }
 
@@ -30,7 +43,7 @@ function filterByType(type) {
 
     if (type === "searchByFName") {
         document.getElementById("firstName").style.display = "block"
-        document.getElementById("lastName").style.display = "none" 
+        document.getElementById("lastName").style.display = "none"
         document.getElementById("BMI").style.display = "none"
     }
     if (type === "searchByLName") {
@@ -45,18 +58,14 @@ function filterByType(type) {
     }
 }
 
-function searchByFName(){
+function searchByFName() {
     m.searchByFName();
 }
 
-function searchByLName(){
+function searchByLName() {
     m.searchByLName();
 }
 
-function searchByBMI(){
+function searchByBMI() {
     m.searchByBMI();
-}
-
-function toFoodPage(){
-    window.location.href = "food.html";
 }
