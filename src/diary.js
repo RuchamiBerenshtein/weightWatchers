@@ -145,12 +145,12 @@ const saveDaily = () => {
         "snack": snack.filter(food => food !== "")
     }
     let i
-    for (i = 0; userDaily.diary[i].date !== newDay.date; i++);
-    if (i > -1) {
-        userDaily.diary[i] = newDay;;
+    for (i = 0; i < userDaily.diary.length && userDaily.diary[i].date !== newDay.date; i++);
+    if (i === userDaily.diary.length) {
+        userDaily.diary.push(newDay);
     }
     else {
-        userDaily.diary.push(newDay);
+        userDaily.diary[i] = newDay;;
     }
 
     fetch(postUrl, {

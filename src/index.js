@@ -27,9 +27,11 @@ const formatDate = ((date = new Date()) => {
     ].join('-');
 })
 
-const closeInput = () => {
+const saveMeet = () => {
     toBlur.classList.remove('blur');
     addMeet.style.display = "none";
+
+    m.saveMeet();
 }
 
 function option() {

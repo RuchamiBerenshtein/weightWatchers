@@ -1,5 +1,7 @@
 class Manager {
 
+    postUrl = `http://localhost:3000/users/`;
+
     constructor(id, firstName, lastName, address, phone, email) {
         this.id = id;
         this.firstName = firstName;
@@ -32,7 +34,8 @@ class Manager {
         const button = document.createElement('button');
 
         users.forEach(user => {
-
+            const id = user.id;
+            user = user.details;
             let tr = tBody.insertRow();
 
             let td1 = tr.insertCell(0);
@@ -55,17 +58,20 @@ class Manager {
 
             let userDetails = button.cloneNode(false);
             userDetails.innerText = 'Details';
-            userDetails.setAttribute('onclick', `changePage(${user.id})`);
+            userDetails.setAttribute('onclick', `changePage(${id})`);
             let td4 = tr.insertCell(3);
             td4.appendChild(userDetails);
         });
     }
 
+    inputs = [];
 
     newMeeting() {
         const tBody = document.getElementById('newUsersWeight');
         tBody.innerHTML = "";
         this.users.forEach(user => {
+            user = user.details;
+
             let tr = tBody.insertRow();
 
             let td1 = tr.insertCell(0);
@@ -77,7 +83,31 @@ class Manager {
             weight.setAttribute("type", "number");
             weight.setAttribute("step", 0.01);
             weight.setAttribute("value", user.weight[user.weight.length - 1]);
+            this.inputs.push(weight);
             td2.appendChild(weight);
+        })
+    }
+
+    saveMeet() {
+        let i = 0;
+        this.inputs.forEach(weight => {
+            debugger
+            this.users[i++].details.weight.push(weight.value);
+        })
+
+        //הקריאה הזו לא עובדת היא מחזירה 404
+        fetch(this.postUrl, {
+            method: `PATCH`,
+            body: JSON.stringify({
+                'users': this.users,
+            }),
+            headers: { 'Content-type': `application/json; charset=UTF-8` },
+        }).then((response) => {
+            if (response.status !== 200 || response.status === undefined)
+                alert(response.message)
+
+            else
+            alert(response.message)
         })
     }
 
@@ -105,5 +135,6 @@ class Manager {
 }
 
 const changePage = (id) => {
+    // debugger
     location.href = `/userDetails.html?id=${id}`
 }
